@@ -70,17 +70,17 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         }
 
         void bind(Exercise exercise, int position) {
-            tvTitle.setText(exercise.getTitle());
-            tvDuration.setText(exercise.getDuration() + " min");
+            tvTitle.setText(exercise.getNom());
+            tvDuration.setText(exercise.getDuree() + " min");
             tvDescription.setText(exercise.getDescription());
 
-            Glide.with(itemView.getContext())
-                    .load(exercise.getThumbnailUrl())
-                    .placeholder(R.drawable.placeholder_thumbnail)
-                    .into(ivThumbnail);
-
-            ivCompleted.setVisibility(exercise.isCompleted() ? View.VISIBLE : View.GONE);
-            progressBar.setVisibility(exercise.isCompleted() ? View.GONE : View.VISIBLE);
+//            Glide.with(itemView.getContext())
+//                    .load(exercise.getThumbnailUrl())
+//                    .placeholder(R.drawable.placeholder_thumbnail)
+//                    .into(ivThumbnail);
+//
+//            ivCompleted.setVisibility(exercise.isCompleted() ? View.VISIBLE : View.GONE);
+//            progressBar.setVisibility(exercise.isCompleted() ? View.GONE : View.VISIBLE);
 
             itemView.setOnClickListener(v -> {
                 if (listener != null) {

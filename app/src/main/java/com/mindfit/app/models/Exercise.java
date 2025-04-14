@@ -3,68 +3,57 @@ package com.mindfit.app.models;
 import java.io.Serializable;
 
 public class Exercise implements Serializable {
-    private String id;
-    private String title;
+    private int id;
+    private String nom;
     private String description;
-    private String videoUrl;
-    private String thumbnailUrl;
-    private int duration; // in minutes
-    private boolean completed;
-    private String moodCategory;
-    private String ageGroup;
-    private String targetState;
-    private int orderInPlaylist;
+    private int duree;
+    private String type;
+    private String frequence_recommandee;
+    private String exerciceHumeur;
+    private String url;
 
     public Exercise() {
     }
 
-    public Exercise(String id, String title, String description, String videoUrl, 
-                   String thumbnailUrl, int duration, String moodCategory, 
-                   String ageGroup, String targetState, int orderInPlaylist) {
+    public Exercise(int id, String nom, String description, int duree,
+                    String type, String frequence_recommandee,
+                    String exerciceHumeur, String url) {
         this.id = id;
-        this.title = title;
+        this.nom = nom;
         this.description = description;
-        this.videoUrl = videoUrl;
-        this.thumbnailUrl = thumbnailUrl;
-        this.duration = duration;
-        this.moodCategory = moodCategory;
-        this.ageGroup = ageGroup;
-        this.targetState = targetState;
-        this.orderInPlaylist = orderInPlaylist;
-        this.completed = false;
+        this.duree = duree;
+        this.type = type;
+        this.frequence_recommandee = frequence_recommandee;
+        this.exerciceHumeur = exerciceHumeur;
+        this.url = url;
     }
 
     // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getVideoUrl() { return videoUrl; }
-    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
+    public int getDuree() { return duree; }
+    public void setDuree(int duree) { this.duree = duree; }
 
-    public String getThumbnailUrl() { return thumbnailUrl; }
-    public void setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
-    public int getDuration() { return duration; }
-    public void setDuration(int duration) { this.duration = duration; }
+    public String getFrequence_recommandee() { return frequence_recommandee; }
+    public void setFrequence_recommandee(String frequence_recommandee) {
+        this.frequence_recommandee = frequence_recommandee;
+    }
 
-    public boolean isCompleted() { return completed; }
-    public void setCompleted(boolean completed) { this.completed = completed; }
+    public String getExerciceHumeur() { return exerciceHumeur; }
+    public void setExerciceHumeur(String exerciceHumeur) {
+        this.exerciceHumeur = exerciceHumeur;
+    }
 
-    public String getMoodCategory() { return moodCategory; }
-    public void setMoodCategory(String moodCategory) { this.moodCategory = moodCategory; }
-
-    public String getAgeGroup() { return ageGroup; }
-    public void setAgeGroup(String ageGroup) { this.ageGroup = ageGroup; }
-
-    public String getTargetState() { return targetState; }
-    public void setTargetState(String targetGender) { this.targetState = targetState; }
-
-    public int getOrderInPlaylist() { return orderInPlaylist; }
-    public void setOrderInPlaylist(int orderInPlaylist) { this.orderInPlaylist = orderInPlaylist; }
+    public String getUrl() { return url; }
+    public void setUrl(String url) { this.url = url; }
 }

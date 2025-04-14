@@ -28,26 +28,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Mood Tracker"
+                    android:text="How Do You Feel Today"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="How Do You Feel Today"
-                    android:textColor="@color/gray" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -58,50 +43,51 @@
                     <LinearLayout
                         android:id="@+id/llMoodContainer"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="8dp">
 
                         <ImageButton
-                            android:id="@+id/btnMoodVeryBad"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:id="@+id/btnMoodTired"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_margin="8dp"
+                            android:scaleType="fitXY"
+                            android:padding="4dp"
                             android:background="@drawable/mood_button_background"
                             android:src="@drawable/ic_mood_very_bad" />
 
+
+
                         <ImageButton
-                            android:id="@+id/btnMoodBad"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:id="@+id/btnMoodAngry"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_margin="8dp"
+                            android:scaleType="fitXY"
+                            android:padding="4dp"
                             android:background="@drawable/mood_button_background"
                             android:src="@drawable/ic_mood_bad" />
 
                         <ImageButton
-                            android:id="@+id/btnMoodNeutral"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:id="@+id/btnMoodRelaxed"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_margin="8dp"
+                            android:scaleType="fitXY"
+                            android:padding="4dp"
                             android:background="@drawable/mood_button_background"
                             android:src="@drawable/ic_mood_neutral" />
 
                         <ImageButton
-                            android:id="@+id/btnMoodGood"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:id="@+id/btnMoodHappy"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_margin="8dp"
-                            android:background="@drawable/mood_button_background"
-                            android:src="@drawable/ic_mood_good" />
-
-                        <ImageButton
-                            android:id="@+id/btnMoodVeryGood"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="8dp"
+                            android:scaleType="fitXY"
+                            android:padding="4dp"
                             android:background="@drawable/mood_button_background"
                             android:src="@drawable/ic_mood_very_good" />
-
                     </LinearLayout>
                 </HorizontalScrollView>
 
@@ -131,9 +117,9 @@
                     android:textAllCaps="false"
                     app:cornerRadius="8dp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

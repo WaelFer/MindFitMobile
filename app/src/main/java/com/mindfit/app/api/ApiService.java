@@ -1,6 +1,7 @@
 package com.mindfit.app.api;
 
 import com.mindfit.app.models.Exercise;
+import com.mindfit.app.models.Meditator;
 import com.mindfit.app.models.MoodEntry;
 import com.mindfit.app.models.MoodStat;
 
@@ -36,4 +37,13 @@ public interface ApiService {
 
     @GET("mood/stats")
     Call<List<MoodStat>> getMoodStats();
+
+    @PUT("meditant/update/{email}")
+    Call<Void> updateProfile(@Path("email") String email, @Body Meditator profileData);
+
+    @GET("meditant/{email}")
+    Call<Meditator> getUserProfile(@Path("email") String email);
+
+    @GET("Coach/exercices/planifier/{mood}")
+    Call<List<Exercise>> getMeditationExercises(@Path("mood") String mood);
 }

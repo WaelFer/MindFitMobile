@@ -31,6 +31,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -53,37 +54,17 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/btnBack"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_back" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Meditation"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btnChat"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_chat" />
 
             </LinearLayout>
 
-            <com.google.android.exoplayer2.ui.PlayerView
-                android:id="@+id/videoPlayer"
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp" />
+                android:layout_height="wrap_content"
+
+               />
 
             <TextView
                 android:id="@+id/tvMoodSuggestion"
@@ -91,13 +72,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/suggestion_background"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:text=""
                 android:lineSpacingExtra="4dp"
                 android:elevation="2dp" />
+            <Button
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="play"/>
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/youtubePlayer"
@@ -105,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-                app:enableAutomaticInitialization="true"
+
                 app:handleNetworkEvents="true" />
 
             <TextView

@@ -7,17 +7,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.mindfit.app.auth.AuthManager;
 
 public class SignInActivity extends AppCompatActivity {
     private TextInputLayout tilEmail, tilPassword;
     private TextInputEditText etEmail, etPassword;
     private MaterialButton btnSignIn;
+    private AuthManager authManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        AuthManager authManager = new AuthManager(this);
 
+        // Check if user is already logged in
+        if (authManager.isLoggedIn()) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+
+        }
         initViews();
         setupListeners();
     }
@@ -37,11 +46,12 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
+        authManager = new AuthManager(this);
         btnSignIn.setOnClickListener(v -> {
             if (validateInput()) {
-                // TODO: Implement actual authentication
-                startActivity(new Intent(this, HomeActivity.class));
-                finish();
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+                authManager.login(email, password);
             }
         });
 

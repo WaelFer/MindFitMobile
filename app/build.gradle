@@ -42,21 +42,24 @@ dependencies {
     // Retrofit for API calls
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    
+
     // OkHttp for network calls
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
-    
+
     // Glide for image loading
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-    
+
     // YouTube Player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
-    
+
     // ExoPlayer for video playback
     implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
-    
+
     // MPAndroidChart for charts
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Volley for network operations
+    implementation 'com.android.volley:volley:1.2.1'
 }

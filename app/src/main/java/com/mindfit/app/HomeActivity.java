@@ -1,8 +1,12 @@
 package com.mindfit.app;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mindfit.app.auth.AuthManager;
 import com.mindfit.app.fragments.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,51 +23,25 @@ public class HomeActivity extends AppCompatActivity {
     private MaterialButton btnConfirmMood;
     private int selectedMoodIndex = -1;
     private BottomNavigationView bottomNavigation;
+    private AuthManager authManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        authManager = new AuthManager(this);
 
         initViews();
         setupListeners();
-        bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-            int itemId = item.getItemId();
-
-            if (itemId == R.id.navigation_home) {
-                selectedFragment = new HomeFragment();
-            } else if (itemId == R.id.navigation_meditation) {
-                // Launch meditation activity
-                startActivity(new Intent(this, MeditationActivity.class));
-                return true;
-            } else if (itemId == R.id.navigation_chatbot) {
-                // Launch chatbot activity
-                startActivity(new Intent(this, ChatbotActivity.class));
-                return true;
-            } else if (itemId == R.id.navigation_stats) {
-                // Launch stats activity
-                startActivity(new Intent(this, StatsActivity.class));
-                return true;
-            }
-
-
-
-            return false;
-        });
-
-        // Set default fragment
-
+        setupBottomNavigation();
     }
 
     private void initViews() {
         moodButtons = new ImageButton[]{
-            findViewById(R.id.btnMoodVeryBad),
-            findViewById(R.id.btnMoodBad),
-            findViewById(R.id.btnMoodNeutral),
-            findViewById(R.id.btnMoodGood),
-            findViewById(R.id.btnMoodVeryGood)
+            findViewById(R.id.btnMoodTired),
+            findViewById(R.id.btnMoodAngry),
+            findViewById(R.id.btnMoodRelaxed),
+            findViewById(R.id.btnMoodHappy)
         };
         etMoodDescription = findViewById(R.id.etMoodDescription);
         btnConfirmMood = findViewById(R.id.btnConfirmMood);
@@ -78,21 +57,71 @@ public class HomeActivity extends AppCompatActivity {
             if (selectedMoodIndex != -1) {
                 String description = etMoodDescription.getText().toString().trim();
                 saveMoodEntry(selectedMoodIndex, description);
-                // Navigate to meditation suggestions
+
+                // Get mood string
+                String mood = getMoodString(selectedMoodIndex);
+
+                // Create intent with mood data
                 Intent intent = new Intent(this, MeditationActivity.class);
                 intent.putExtra("mood_index", selectedMoodIndex);
+                intent.putExtra("mood_string", mood);
                 startActivity(intent);
             }
         });
     }
 
+    private void setupBottomNavigation() {
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.navigation_home) {
+                selectedFragment = new HomeFragment();
+            } else if (itemId == R.id.navigation_chatbot) {
+                startActivity(new Intent(this, ChatbotActivity.class));
+                return true;
+            } else if (itemId == R.id.navigation_stats) {
+                startActivity(new Intent(this, StatsActivity.class));
+                return true;
+            } else if (itemId == R.id.navigation_profile) {
+                Intent intent = new Intent(this, UpdateProfileActivity.class);
+                intent.putExtra("token", authManager.getToken());
+                String email = authManager.getEmail();
+                if (email == null) {
+                    // Try to fetch email from server
+                    authManager.fetchUserDetails();
+                    // Wait a moment for the email to be fetched
+                    try {
+                        Thread.sleep(1000); // Wait 1 second
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    email = authManager.getEmail();
+                }
+                if (email == null) {
+                    Toast.makeText(this, "Erreur: Email non disponible", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                intent.putExtra("email", email);
+                startActivity(intent);
+                return true;
+            } else if (itemId == R.id.navigation_logout) {
+                authManager.logout();
+                Intent intent = new Intent(this, SignInActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+
+            return false;
+        });
+    }
+
     private void selectMood(int index) {
-        // Reset all buttons to default state
-        for (ImageButton button : moodButtons) {
-            button.setSelected(false);
+        for (int i = 0; i < moodButtons.length; i++) {
+            moodButtons[i].setSelected(i == index);
         }
-        // Select the clicked button
-        moodButtons[index].setSelected(true);
         selectedMoodIndex = index;
     }
 
@@ -106,5 +135,15 @@ public class HomeActivity extends AppCompatActivity {
             message += "\nDescription: " + description;
         }
         // TODO: Send this data to backend
+    }
+
+    private String getMoodString(int moodIndex) {
+        switch (moodIndex) {
+            case 0: return "Tired";
+            case 1: return "Angry";
+            case 2: return "Relaxed";
+            case 3: return "Content";
+            default: return "";
+        }
     }
 }
